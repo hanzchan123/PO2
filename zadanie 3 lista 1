@@ -1,0 +1,62 @@
+import random
+
+class Die:
+    def __init__(self,x):
+        print("Kostka w gotowosci")
+        self.sides = x
+        self.value = None
+
+    def roll(self):
+        self.value = random.randint(1,self.sides)
+
+
+    def get_sides(self):
+        return self.sides
+
+    def get_value(self):
+        return self.value
+
+
+if __name__ == '__main__':
+    kostka_g1 = Die(6)
+    kostka_g2 = Die(6)
+    kostka_pc1 = Die(6)
+    kostka_pc2 = Die(6)
+
+    saldo_gracza = 0
+    saldo_pc=0
+
+while(1==1):
+    if (saldo_pc > 21 and saldo_gracza <= 21):
+         print("Suma oczek pc jest wieksza niz 21, wygrales!")
+         break
+    elif(saldo_gracza > 21):
+        print("Suma twoich oczek jest wieksza niz 21, przegrales!")
+        break
+    else:
+        kostka_pc1.roll()
+        kostka_pc2.roll()
+        n = input("Komputer wykonal rzut, czy chcesz rzucic koscmi? (T/N): ")
+
+        if(n == "N"):
+            break
+        elif(n=="T"):
+
+            kostka_g1.roll()
+            kostka_g2.roll()
+
+
+        saldo_pc = saldo_pc + kostka_pc1.get_value() + kostka_pc2.get_value()
+        saldo_gracza = saldo_gracza + kostka_g1.get_value() + kostka_g2.get_value()
+
+        print(f"Suma twoich punktow wynosi: {saldo_gracza}")
+
+
+print(f"Suma punktow komputera: {saldo_pc}")
+
+if(saldo_pc > saldo_gracza and saldo_pc <=21):
+    print("Przegrales")
+elif(saldo_gracza > saldo_pc and saldo_gracza <=21):
+    print("Wygrales")
+elif(saldo_gracza == saldo_pc):
+    print("Remis")
